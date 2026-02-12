@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>For Bbub🫶🏻</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #667eea, #f797b4);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+      color: #ffffff;
+      overflow: hidden;
+    }
+
+    /* Floating hearts background */
+    .heart {
+      position: absolute;
+      font-size: 18px;
+      animation: float 8s linear infinite;
+      opacity: 0.6;
+    }
+
+    @keyframes float {
+      from { transform: translateY(100vh); }
+      to { transform: translateY(-10vh); }
+    }
+
+    .card {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.08));
+      padding: 30px;
+      border-radius: 25px;
+      backdrop-filter: blur(14px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+      max-width: 400px;
+      width: 92%;
+      transition: 0.4s ease;
+      z-index: 2;
+      border: 1px solid rgba(255,255,255,0.3);
+    }
+    }
+
+    h1 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 15px;
+      margin-bottom: 20px;
+    }
+
+    .note {
+      font-size: 13px;
+      opacity: 0.9;
+      margin-top: 8px;
+    }
+
+    .progress {
+      height: 8px;
+      background: rgba(255,255,255,0.3);
+      border-radius: 10px;
+      margin-bottom: 15px;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background: #ffffff;
+      transition: width 0.4s ease;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+
+    button {
+      padding: 10px 18px;
+      border: none;
+      border-radius: 25px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: 0.25s ease;
+    }
+
+    .primary {
+      background: linear-gradient(135deg, #ff6a88, #ff99ac);
+      color: white;
+      font-weight: bold;
+      box-shadow: 0 8px 20px rgba(255, 105, 135, 0.4);
+    }
+
+    .secondary {
+      background: linear-gradient(135deg, rgba(255,255,255,0.35), rgba(255,255,255,0.15));
+      color: white;
+      border: 1px solid rgba(255,255,255,0.5);
+      backdrop-filter: blur(6px);
+    }
+
+    button:hover {
+      transform: scale(1.08);
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .question {
+      margin-top: 10px;
+      margin-bottom: 18px;
+      font-size: 17px;
+      font-weight: bold;
+      line-height: 1.4;
+    }
+
+    .summary {
+      font-size: 14px;
+      margin-top: 10px;
+      text-align: left;
+    }
+
+    .confetti {
+      font-size: 24px;
+      margin-top: 10px;
+      animation: pop 0.6s ease infinite alternate;
+    }
+
+    @keyframes pop {
+      from { transform: translateY(0px); }
+      to { transform: translateY(-8px); }
+    }
+  </style>
+</head>
+<body>
+  <!-- Floating hearts -->
+  <script>
+    for (let i = 0; i < 20; i++) {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.innerHTML = '💖';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = (6 + Math.random() * 6) + 's';
+      document.body.appendChild(heart);
+    }
+  </script>
+
+  <div class="card" id="card">
+    <h1>Hi Bbub🫶🏻</h1>
+    <p>This coming Valentine’s Day, I know you already have errands, but I’d like to ask you out on a date when you’re available.</p>
+    <div class="note">📹 Take note: Please screen record while answering the questions 😉</div>
+    <div class="buttons">
+      <button class="primary" onclick="startQuestions()">Click here to Start 💌</button>
+    </div>
+
+    <div id="quiz" class="hidden">
+      <div class="progress"><div class="progress-bar" id="progressBar"></div></div>
+      <div class="question" id="questionText"></div>
+      
+      <div class="buttons" id="answerButtons"></div>
+    </div>
+
+    <div id="final" class="hidden">
+      <h1>So... Will You Be My Valentine? 💖</h1>
+      <div class="summary" id="summary"></div>
+      <div class="buttons">
+        <button class="primary" onclick="sayYes()">Yes 💕</button>
+        <button class="secondary" onmouseover="moveButton(this)">No 😜</button>
+      </div>
+      <div id="celebrate" class="hidden confetti">🎉💖🎉 YOU SAID YES! 💖🎉</div>
+    </div>
+  </div>
+
+  <script>
+    const questions = [
+      {
+        text: "What would you like for dinner? 🍴",
+        answers: ["Pork 🐷", "Beef 🥩", "Chicken 🐓", "Seafoods 🦐"]
+      },
+      {
+        text: "What color should we wear to match? 👗",
+        answers: ["Blue 🩵", "Red 🩷", "White 🤍"]
+      },
+      {
+        text: "Would you prefer a long drive date or a short one? 🌹",
+        answers: ["Long Drive", "Short Drive"]
+      }
+    ];
+
+    let currentQuestion = 0;
+    const answersChosen = [];
+
+    function startQuestions() {
+      document.querySelector('p').classList.add('hidden');
+      document.querySelector('.primary').classList.add('hidden');
+      document.getElementById('quiz').classList.remove('hidden');
+      showQuestion();
+    }
+
+    function showQuestion() {
+      const question = questions[currentQuestion];
+      document.getElementById('questionText').innerText = question.text;
+
+      
+
+      const progress = ((currentQuestion) / questions.length) * 100;
+      document.getElementById('progressBar').style.width = progress + '%';
+
+      const answerContainer = document.getElementById('answerButtons');
+      answerContainer.innerHTML = '';
+
+      question.answers.forEach(answer => {
+        const btn = document.createElement('button');
+        btn.innerText = answer;
+        btn.className = 'secondary';
+        btn.onclick = () => nextQuestion(answer);
+        answerContainer.appendChild(btn);
+      });
+    }
+
+    function nextQuestion(answer) {
+      answersChosen.push(answer);
+      currentQuestion++;
+
+      if (currentQuestion < questions.length) {
+        showQuestion();
+      } else {
+        document.getElementById('progressBar').style.width = '100%';
+        showFinal();
+      }
+    }
+
+    function showFinal() {
+      document.getElementById('quiz').classList.add('hidden');
+      document.getElementById('final').classList.remove('hidden');
+
+      const summary = document.getElementById('summary');
+      summary.innerHTML = `
+        <strong>Your date choices:</strong><br>
+        🍽 Dinner: ${answersChosen[0]}<br>
+        🎨 Outfit color: ${answersChosen[1]}<br>
+        🚗 Drive: ${answersChosen[2]}
+      `;
+    }
+
+    function sayYes() {
+      document.getElementById('celebrate').classList.remove('hidden');
+    }
+
+    function moveButton(button) {
+      const x = Math.random() * 200 - 100;
+      const y = Math.random() * 200 - 100;
+      button.style.transform = `translate(${x}px, ${y}px)`;
+    }
+  </script>
+</body>
+</html>
