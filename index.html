@@ -608,23 +608,22 @@
     </div>
 
     <!-- PAGE 1: INTRO -->
-    <div id="intro">
-      <h1>Hi Bbub🫶🏻</h1>
-      <p>
-        This coming Valentine’s Day, I know you already have errands —
-        but I’d love to take you out on a date whenever you’re free.
-      </p>
+   <div id="intro">
+  <h1>Hi Bbub🫶🏻</h1>
+  <p>
+    This coming Valentine’s Day, I know you already have errands —
+    but I’d love to take you out on a date whenever you’re free.
+  </p>
 
-      <div class="note">📹 Take note: please screen record while answering the questions 😉</div>
-      <div class="divider"></div>
+  <div class="note">📹 Take note: please screen record while answering the questions 😉</div>
+  <div class="divider"></div>
 
-      <div class="buttons" id="startArea">
-        <button class="primary" onclick="startQuestions()">Start 💌</button>
-        <button class="secondary" onclick="skipToPick()">Skip to date/time ⏰</button>
-      </div>
+  <div class="buttons" id="startArea">
+    <button class="primary" onclick="startQuestions()">Start 💌</button>
+  </div>
 
-      <div class="footer">Small reminder: you can always go back and change answers ✨</div>
-    </div>
+  <div class="footer">Small reminder: you can always go back and change answers ✨</div>
+</div>
 
     <!-- PAGE 2: QUIZ -->
     <div id="quiz" class="hidden">
@@ -729,22 +728,23 @@
 
     <!-- PAGE 5: RECEIPT + CONFIRM -->
     <div id="loveReceiptPage" class="hidden">
-      <h1>Our Little Love Receipt 💌</h1>
-      <p style="margin-bottom:10px;">
-        Just to make sure everything looks perfect… 🫶🏻
-      </p>
+  <h1>Our Little Love Receipt 💌</h1>
+  <p style="margin-bottom:10px;">
+    Just to make sure everything looks perfect… 🫶🏻
+  </p>
 
-      <div class="summary" id="loveReceiptBox"></div>
+  <div class="summary" id="loveReceiptBox"></div>
 
-      <div class="buttons">
-        <button class="primary" onclick="confirmEverything()">Confirm 💞</button>
-        <button class="ghost" onclick="backToValentine()">← Back</button>
-        <button class="secondary" onclick="copyReceipt()">Copy receipt 📋</button>
-      </div>
+  <div class="buttons">
+    <button class="primary" onclick="confirmEverything()">Confirm 💞</button>
+    <button class="secondary" onclick="copyReceipt()">Copy receipt 📋</button>
+  </div>
 
-      <div id="celebrate" class="hidden confetti">See you on our date, I'm so excited 💕</div>
-      <div class="footer" id="footerReceipt">Made for Bbub🫶🏻 ✨</div>
-    </div>
+  <div id="celebrate" class="hidden confetti">
+    See you on our date, I'm so excited 💕
+  </div>
+  <div class="footer" id="footerReceipt">Made for Bbub🫶🏻 ✨</div>
+</div>
   </div>
 
   <!-- Mini menu modal -->
@@ -935,12 +935,12 @@
 
     function skipToPick(){
       document.getElementById('intro').classList.add('fadeOut');
-      setTimeout(() => {
-        document.getElementById('intro').classList.add('hidden');
-        document.getElementById('quiz').classList.add('hidden');
-        showFinal();
-      }, 340);
-    }
+  setTimeout(() => {
+    document.getElementById('intro').classList.add('hidden');
+    document.getElementById('quiz').classList.add('hidden');
+    showFinal();
+  }, 340);
+}
 
     function showFinal(){
       document.getElementById('quiz').classList.add('hidden');
@@ -1104,10 +1104,10 @@
 
     function backToValentine(){
       document.getElementById('loveReceiptPage').classList.add('hidden');
-      document.getElementById('valentine').classList.remove('hidden');
-      document.getElementById('stepText').textContent = 'Final question 😌';
-      toast("Back 🫶🏻");
-    }
+  document.getElementById('valentine').classList.remove('hidden');
+  document.getElementById('stepText').textContent = 'Final question 😌';
+  toast("Back 🫶🏻");
+}
 
     function burstHearts(count = 18){
       for (let i = 0; i < count; i++){
