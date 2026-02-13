@@ -4,235 +4,494 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>For Bbub🫶🏻</title>
+
   <style>
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Arial', sans-serif;
-      background: linear-gradient(135deg, #667eea, #f797b4);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      text-align: center;
-      color: #ffffff;
-      overflow: hidden;
+    :root{
+      --glass: rgba(255,255,255,.16);
+      --glass-2: rgba(255,255,255,.08);
+      --stroke: rgba(255,255,255,.35);
+      --shadow: rgba(0,0,0,.28);
+      --text: rgba(255,255,255,.94);
+      --text-soft: rgba(255,255,255,.82);
+
+      --pink: #ff6a88;
+      --pink2:#ff99ac;
+      --white: rgba(255,255,255,.92);
+    }
+
+    *{ box-sizing:border-box; }
+
+    body{
+      margin:0;
+      min-height:100vh;
+      display:grid;
+      place-items:center;
+      font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color: var(--text);
+      overflow:hidden;
+      padding: 18px;
+
+      background:
+        radial-gradient(1200px 600px at 20% 10%, rgba(255,255,255,.16), transparent 60%),
+        radial-gradient(900px 500px at 90% 20%, rgba(255,255,255,.12), transparent 55%),
+        linear-gradient(135deg, #667eea, #f797b4);
+    }
+
+    /* subtle vignette */
+    body::after{
+      content:"";
+      position:fixed;
+      inset:-40px;
+      pointer-events:none;
+      background: radial-gradient(900px 600px at 50% 40%, transparent 40%, rgba(0,0,0,.18) 100%);
+      z-index:0;
     }
 
     /* Floating hearts background */
-    .heart {
-      position: absolute;
-      font-size: 18px;
-      animation: float 8s linear infinite;
-      opacity: 0.6;
+    .heart{
+      position:absolute;
+      top:110vh;
+      opacity:.55;
+      animation: floatUp linear infinite;
+      pointer-events:none;
+      user-select:none;
+      z-index:0;
+      will-change: transform;
     }
 
-    @keyframes float {
-      from { transform: translateY(100vh); }
-      to { transform: translateY(-10vh); }
+    @keyframes floatUp{
+      from { transform: translateY(0) translateX(0) rotate(0deg); }
+      to   { transform: translateY(-135vh) translateX(60px) rotate(22deg); }
     }
 
-    .card {
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.08));
-      padding: 30px;
-      border-radius: 25px;
-      backdrop-filter: blur(14px);
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
-      max-width: 400px;
-      width: 92%;
-      transition: 0.4s ease;
-      z-index: 2;
-      border: 1px solid rgba(255,255,255,0.3);
-    }
-    }
-
-    h1 {
-      font-size: 24px;
-      margin-bottom: 10px;
+    /* sparkles */
+    .sparkle{
+      position:absolute;
+      top:110vh;
+      width:3px;
+      height:3px;
+      border-radius:999px;
+      background: rgba(255,255,255,.8);
+      opacity:.5;
+      animation: sparkleUp linear infinite;
+      z-index:0;
+      filter: blur(.2px);
     }
 
-    p {
+    @keyframes sparkleUp{
+      from { transform: translateY(0); opacity: .15; }
+      30%  { opacity: .55; }
+      to   { transform: translateY(-135vh); opacity: .05; }
+    }
+
+    .card{
+      width:min(500px, 94vw);
+      padding: 26px 24px 22px;
+      border-radius: 28px;
+      background: linear-gradient(135deg, var(--glass), var(--glass-2));
+      border: 1px solid var(--stroke);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 24px 60px var(--shadow);
+      text-align:center;
+      position:relative;
+      z-index:2;
+      overflow:hidden;
+      animation: enter .55s ease both;
+    }
+
+    /* inner glow */
+    .card::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:
+        radial-gradient(480px 200px at 20% 10%, rgba(255,255,255,.18), transparent 55%),
+        radial-gradient(420px 220px at 90% 0%, rgba(255,255,255,.12), transparent 60%);
+      pointer-events:none;
+      z-index:-1;
+    }
+
+    @keyframes enter{
+      from { transform: translateY(10px) scale(.985); opacity: 0; }
+      to   { transform: translateY(0) scale(1); opacity: 1; }
+    }
+
+    /* Header row */
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      font-size: 12px;
+      color: rgba(255,255,255,.88);
+      padding: 7px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.28);
+      background: rgba(255,255,255,.08);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .chip{
+      font-size: 12px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.28);
+      background: rgba(255,255,255,.08);
+      color: rgba(255,255,255,.9);
+    }
+
+    h1{
+      margin: 6px 0 8px;
+      font-size: clamp(22px, 4vw, 30px);
+      letter-spacing: .2px;
+    }
+
+    p{
+      margin: 0 0 16px;
       font-size: 15px;
-      margin-bottom: 20px;
+      line-height: 1.6;
+      color: var(--text-soft);
     }
 
-    .note {
+    .note{
+      margin: 12px auto 0;
       font-size: 13px;
-      opacity: 0.9;
+      color: rgba(255,255,255,.86);
+      line-height: 1.45;
+    }
+
+    .divider{
+      height: 1px;
+      background: rgba(255,255,255,.22);
+      margin: 16px 0 18px;
+      border-radius: 99px;
+    }
+
+    .progressWrap{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      margin-top: 4px;
+      gap: 12px;
+    }
+
+    .progressLabel{
+      font-size: 12px;
+      color: rgba(255,255,255,.85);
+      white-space: nowrap;
+      opacity: .95;
+    }
+
+    .progress{
+      flex:1;
+      height: 9px;
+      background: rgba(255,255,255,.22);
+      border-radius: 999px;
+      overflow:hidden;
+    }
+
+    .progress-bar{
+      height:100%;
+      width:0%;
+      background: rgba(255,255,255,.92);
+      border-radius: 999px;
+      transition: width .35s ease;
+    }
+
+    .question{
+      font-size: 17px;
+      font-weight: 750;
+      line-height: 1.35;
+      margin: 10px 0 16px;
+      letter-spacing: .1px;
+    }
+
+    .buttons{
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      gap: 12px;
       margin-top: 8px;
     }
 
-    .progress {
-      height: 8px;
-      background: rgba(255,255,255,0.3);
-      border-radius: 10px;
-      margin-bottom: 15px;
-      overflow: hidden;
-    }
-
-    .progress-bar {
-      height: 100%;
-      width: 0%;
-      background: #ffffff;
-      transition: width 0.4s ease;
-    }
-
-    .buttons {
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-top: 10px;
-    }
-
-    button {
-      padding: 10px 18px;
-      border: none;
-      border-radius: 25px;
+    button{
+      border:none;
+      border-radius: 999px;
+      padding: 11px 18px;
       font-size: 14px;
-      cursor: pointer;
-      transition: 0.25s ease;
+      cursor:pointer;
+      transition: transform .18s ease, filter .18s ease, box-shadow .18s ease;
+      color: rgba(255,255,255,.95);
+      outline: none;
     }
 
-    .primary {
-      background: linear-gradient(135deg, #ff6a88, #ff99ac);
-      color: white;
-      font-weight: bold;
-      box-shadow: 0 8px 20px rgba(255, 105, 135, 0.4);
+    button:hover{ transform: translateY(-1px) scale(1.03); filter: brightness(1.03); }
+    button:active{ transform: translateY(0) scale(.99); }
+
+    .primary{
+      background: linear-gradient(135deg, var(--pink), var(--pink2));
+      font-weight: 800;
+      box-shadow: 0 10px 26px rgba(255, 105, 135, .45);
     }
 
-    .secondary {
-      background: linear-gradient(135deg, rgba(255,255,255,0.35), rgba(255,255,255,0.15));
-      color: white;
-      border: 1px solid rgba(255,255,255,0.5);
-      backdrop-filter: blur(6px);
+    .secondary{
+      background: linear-gradient(135deg, rgba(255,255,255,.26), rgba(255,255,255,.12));
+      border: 1px solid rgba(255,255,255,.38);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
     }
 
-    button:hover {
-      transform: scale(1.08);
+    .ghost{
+      background: transparent;
+      border: 1px solid rgba(255,255,255,.35);
+      color: rgba(255,255,255,.9);
     }
 
-    .hidden {
-      display: none;
-    }
+    .hidden{ display:none; }
 
-    .question {
-      margin-top: 10px;
-      margin-bottom: 18px;
-      font-size: 17px;
-      font-weight: bold;
-      line-height: 1.4;
-    }
-
-    .summary {
+    .summary{
+      text-align:left;
+      margin-top: 12px;
       font-size: 14px;
-      margin-top: 10px;
-      text-align: left;
+      line-height: 1.6;
+      color: rgba(255,255,255,.9);
+      padding: 14px 14px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.26);
+      background: rgba(255,255,255,.07);
     }
 
-    .confetti {
-      font-size: 24px;
-      margin-top: 10px;
-      animation: pop 0.6s ease infinite alternate;
+    .summary strong{ color: rgba(255,255,255,.95); }
+
+    .summary .row{
+      display:flex;
+      justify-content:space-between;
+      gap: 10px;
+      padding: 8px 0;
+      border-bottom: 1px dashed rgba(255,255,255,.18);
+    }
+    .summary .row:last-child{ border-bottom: none; }
+    .summary .k{ opacity: .85; }
+    .summary .v{ font-weight: 700; text-align:right; }
+
+    /* celebratory burst */
+    .confetti{
+      margin-top: 14px;
+      font-size: 22px;
+      animation: pop .65s ease-in-out infinite alternate;
+      text-shadow: 0 8px 20px rgba(0,0,0,.25);
+    }
+    @keyframes pop{
+      from{ transform: translateY(0); }
+      to{ transform: translateY(-7px); }
     }
 
-    @keyframes pop {
-      from { transform: translateY(0px); }
-      to { transform: translateY(-8px); }
+    /* Keeps the "No" button movement separate from hover scale */
+    .no-wrap{ position: relative; display:inline-flex; }
+    .no-btn{ position: relative; }
+
+    /* tiny footer */
+    .footer{
+      margin-top: 14px;
+      font-size: 12px;
+      color: rgba(255,255,255,.75);
+      opacity: .95;
+    }
+
+    /* smooth hide */
+    .fadeOut{
+      animation: fadeOut .35s ease forwards;
+    }
+    @keyframes fadeOut{
+      to { opacity: 0; transform: translateY(-6px); }
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      *{ animation: none !important; transition: none !important; }
     }
   </style>
 </head>
-<body>
-  <!-- Floating hearts -->
-  <script>
-    for (let i = 0; i < 20; i++) {
-      const heart = document.createElement('div');
-      heart.className = 'heart';
-      heart.innerHTML = '💖';
-      heart.style.left = Math.random() * 100 + 'vw';
-      heart.style.animationDuration = (6 + Math.random() * 6) + 's';
-      document.body.appendChild(heart);
-    }
-  </script>
 
+<body>
   <div class="card" id="card">
-    <h1>Hi Bbub🫶🏻</h1>
-    <p>This coming Valentine’s Day, I know you already have errands, but I’d like to ask you out on a date when you’re available.</p>
-    <div class="note">📹 Take note: Please screen record while answering the questions 😉</div>
-    <div class="buttons">
-      <button class="primary" onclick="startQuestions()">Click here to Start 💌</button>
+    <div class="topbar">
+      <div class="badge">💌 <span id="stepText">A tiny date quiz</span></div>
+      <div class="chip" id="timeChip">✨</div>
+    </div>
+
+    <div id="intro">
+      <h1>Hi Bbub🫶🏻</h1>
+      <p>
+        This coming Valentine’s Day, I know you already have errands —
+        but I’d love to take you out on a date whenever you’re free.
+      </p>
+      <div class="note">📹 Take note: please screen record while answering the questions 😉</div>
+      <div class="divider"></div>
+    </div>
+
+    <div class="buttons" id="startArea">
+      <button class="primary" onclick="startQuestions()">Start 💌</button>
     </div>
 
     <div id="quiz" class="hidden">
-      <div class="progress"><div class="progress-bar" id="progressBar"></div></div>
+      <div class="progressWrap">
+        <div class="progressLabel" id="progressLabel">Question 1 of 7</div>
+        <div class="progress"><div class="progress-bar" id="progressBar"></div></div>
+      </div>
+
       <div class="question" id="questionText"></div>
-      
       <div class="buttons" id="answerButtons"></div>
+
+      <div class="buttons">
+        <button class="ghost" onclick="goBack()" id="backBtn" disabled>← Back</button>
+      </div>
+
+      <div class="footer">Tip: choose what feels right — we’ll build the date together ✨</div>
     </div>
 
     <div id="final" class="hidden">
-      <h1>So... Will You Be My Valentine? 💖</h1>
+      <h1>So… will you be my Valentine? 💖</h1>
+
       <div class="summary" id="summary"></div>
+
       <div class="buttons">
         <button class="primary" onclick="sayYes()">Yes 💕</button>
-        <button class="secondary" onmouseover="moveButton(this)">No 😜</button>
+
+        <span class="no-wrap">
+          <button class="secondary no-btn" id="noBtn" onmouseenter="moveNo()">No 😜</button>
+        </span>
       </div>
-      <div id="celebrate" class="hidden confetti">🎉💖🎉 YOU SAID YES! 💖🎉</div>
+
+      <div id="celebrate" class="hidden confetti">🎉💖🎉 YOU SAID YES! YEHEYYYY!! 💖🎉</div>
+      <div class="footer" id="footerFinal">Made for Bbub🫶🏻 ✨</div>
     </div>
   </div>
 
   <script>
-    const questions = [
-      {
-        text: "What would you like for dinner? 🍴",
-        answers: ["Pork 🐷", "Beef 🥩", "Chicken 🐓", "Seafoods 🦐"]
-      },
-      {
-        text: "What color should we wear to match? 👗",
-        answers: ["Blue 🩵", "Red 🩷", "White 🤍"]
-      },
-      {
-        text: "Would you prefer a long drive date or a short one? 🌹",
-        answers: ["Long Drive", "Short Drive"]
+    // ---- Floating background (hearts + sparkles) ----
+    (function spawnBackground(){
+      const hearts = 24;
+      const sparkles = 28;
+
+      for (let i = 0; i < hearts; i++) {
+        const heart = document.createElement('div');
+        heart.className = 'heart';
+        heart.textContent = (Math.random() > 0.75) ? '💕' : '💖';
+
+        const size = 14 + Math.random() * 22; // 14–36px
+        heart.style.fontSize = size + 'px';
+        heart.style.left = (Math.random() * 100) + 'vw';
+        heart.style.opacity = (0.20 + Math.random() * 0.55).toFixed(2);
+        heart.style.filter = `blur(${(Math.random() * 1.1).toFixed(2)}px)`;
+
+        const dur = 7 + Math.random() * 8;  // 7–15s
+        const delay = Math.random() * 7;    // 0–7s
+        heart.style.animationDuration = dur + 's';
+        heart.style.animationDelay = (-delay) + 's';
+
+        document.body.appendChild(heart);
       }
+
+      for (let i = 0; i < sparkles; i++) {
+        const s = document.createElement('div');
+        s.className = 'sparkle';
+        s.style.left = (Math.random() * 100) + 'vw';
+
+        const dur = 6 + Math.random() * 8;
+        const delay = Math.random() * 8;
+        s.style.animationDuration = dur + 's';
+        s.style.animationDelay = (-delay) + 's';
+
+        const size = 2 + Math.random() * 2.5;
+        s.style.width = size + 'px';
+        s.style.height = size + 'px';
+
+        s.style.opacity = (0.15 + Math.random() * 0.45).toFixed(2);
+        document.body.appendChild(s);
+      }
+    })();
+
+    // ---- Time chip (cute touch) ----
+    (function setTimeChip(){
+      const el = document.getElementById('timeChip');
+      const now = new Date();
+      const opts = { hour: '2-digit', minute:'2-digit' };
+      el.textContent = `⏰ ${now.toLocaleTimeString([], opts)}`;
+    })();
+
+    // ---- Questions ----
+    const questions = [
+      { key:"Dinner", text: "What would you like for dinner? 🍴", answers: ["Pork 🐷", "Beef 🥩", "Chicken 🐓", "Seafoods 🦐"] },
+      { key:"Outfit", text: "What color should we wear to match? 👗", answers: ["Blue 🩵", "Red 🩷", "White 🤍", "Black 🖤"] },
+      { key:"After",  text: "Where should we go after dinner? 🌃", answers: ["Coffee shop ☕", "Dessert place 🍰", "Park walk 🌳", "Scenic view 🌆"] },
+      { key:"Vibe",   text: "What kind of date vibe do you want? ✨", answers: ["Romantic 💕", "Fun & playful 😄", "Chill & cozy 🧸", "Adventurous 🚗"] },
+      { key:"Gift",   text: "What gift would make you smile? 🎁", answers: ["Flowers 🌹", "Chocolates 🍫", "Stuffed toy 🧸", "A surprise 😏"] },
+      { key:"Photos", text: "Should we take cute pictures together? 📸", answers: ["Of course! 😍", "Maybe a few 🙂", "Only if I look good 😌"] },
+      { key:"Drive",  text: "Would you prefer a long drive date or a short one? 🚗", answers: ["Long drive 🚗", "Short drive 🚘"] }
     ];
 
     let currentQuestion = 0;
     const answersChosen = [];
 
-    function startQuestions() {
-      document.querySelector('p').classList.add('hidden');
-      document.querySelector('.primary').classList.add('hidden');
-      document.getElementById('quiz').classList.remove('hidden');
-      showQuestion();
+    // smooth intro hide
+    function startQuestions(){
+      const intro = document.getElementById('intro');
+      const startArea = document.getElementById('startArea');
+
+      intro.classList.add('fadeOut');
+      startArea.classList.add('fadeOut');
+
+      setTimeout(() => {
+        intro.classList.add('hidden');
+        startArea.classList.add('hidden');
+
+        document.getElementById('quiz').classList.remove('hidden');
+        document.getElementById('stepText').textContent = 'Answer honestly 😉';
+        showQuestion();
+      }, 340);
     }
 
-    function showQuestion() {
-      const question = questions[currentQuestion];
-      document.getElementById('questionText').innerText = question.text;
+    function showQuestion(){
+      const q = questions[currentQuestion];
 
-      
+      document.getElementById('questionText').textContent = q.text;
 
-      const progress = ((currentQuestion) / questions.length) * 100;
+      const label = `Question ${currentQuestion + 1} of ${questions.length}`;
+      document.getElementById('progressLabel').textContent = label;
+
+      const progress = (currentQuestion / questions.length) * 100;
       document.getElementById('progressBar').style.width = progress + '%';
 
       const answerContainer = document.getElementById('answerButtons');
       answerContainer.innerHTML = '';
 
-      question.answers.forEach(answer => {
+      q.answers.forEach(a => {
         const btn = document.createElement('button');
-        btn.innerText = answer;
         btn.className = 'secondary';
-        btn.onclick = () => nextQuestion(answer);
+        btn.textContent = a;
+        btn.onclick = () => nextQuestion(a);
         answerContainer.appendChild(btn);
       });
+
+      const backBtn = document.getElementById('backBtn');
+      backBtn.disabled = currentQuestion === 0;
+      backBtn.style.opacity = backBtn.disabled ? .55 : 1;
     }
 
-    function nextQuestion(answer) {
-      answersChosen.push(answer);
+    function nextQuestion(answer){
+      answersChosen[currentQuestion] = answer;
       currentQuestion++;
 
-      if (currentQuestion < questions.length) {
+      if(currentQuestion < questions.length){
         showQuestion();
       } else {
         document.getElementById('progressBar').style.width = '100%';
@@ -240,29 +499,72 @@
       }
     }
 
-    function showFinal() {
+    function goBack(){
+      if(currentQuestion === 0) return;
+      currentQuestion--;
+      showQuestion();
+    }
+
+    function showFinal(){
       document.getElementById('quiz').classList.add('hidden');
       document.getElementById('final').classList.remove('hidden');
+      document.getElementById('stepText').textContent = 'Final question 😌';
 
-      const summary = document.getElementById('summary');
-      summary.innerHTML = `
-        <strong>Your date choices:</strong><br>
-        🍽 Dinner: ${answersChosen[0]}<br>
-        🎨 Outfit color: ${answersChosen[1]}<br>
-        🚗 Drive: ${answersChosen[2]}
+      const rows = questions.map((q, i) => {
+        const v = answersChosen[i] || "";
+        return `<div class="row"><div class="k">${q.key}</div><div class="v">${v}</div></div>`;
+      }).join("");
+
+      document.getElementById('summary').innerHTML = `
+        <strong>Your date plan ✨</strong>
+        <div style="height:10px"></div>
+        ${rows}
       `;
     }
 
-    function sayYes() {
-      document.getElementById('celebrate').classList.remove('hidden');
+    // small heart burst (simple + elegant)
+    function burstHearts(count = 14){
+      for (let i = 0; i < count; i++){
+        const h = document.createElement('div');
+        h.textContent = (Math.random() > 0.5) ? '💖' : '💕';
+        h.style.position = 'fixed';
+        h.style.left = (50 + (Math.random()*30 - 15)) + 'vw';
+        h.style.top  = (55 + (Math.random()*20 - 10)) + 'vh';
+        h.style.fontSize = (18 + Math.random()*18) + 'px';
+        h.style.opacity = '0.95';
+        h.style.transform = 'translate(-50%, -50%)';
+        h.style.pointerEvents = 'none';
+        h.style.zIndex = 10;
+
+        const x = (Math.random()*240 - 120);
+        const y = -(120 + Math.random()*160);
+        const r = (Math.random()*30 - 15);
+
+        h.animate([
+          { transform:`translate(-50%, -50%) translate(0px,0px) rotate(0deg)`, opacity: .95 },
+          { transform:`translate(-50%, -50%) translate(${x}px,${y}px) rotate(${r}deg)`, opacity: 0 }
+        ], { duration: 900 + Math.random()*500, easing: 'cubic-bezier(.2,.8,.2,1)' });
+
+        document.body.appendChild(h);
+        setTimeout(() => h.remove(), 1500);
+      }
     }
 
-    function moveButton(button) {
-      const x = Math.random() * 200 - 100;
-      const y = Math.random() * 200 - 100;
-      button.style.transform = `translate(${x}px, ${y}px)`;
+    function sayYes(){
+      document.getElementById('celebrate').classList.remove('hidden');
+      document.getElementById('footerFinal').textContent = 'See you on our date 💕';
+      burstHearts();
+    }
+
+    function moveNo(){
+      const btn = document.getElementById('noBtn');
+
+      // Move within a comfortable range without flying off-screen
+      const x = Math.floor(Math.random() * 180) - 90;  // -90..90
+      const y = Math.floor(Math.random() * 140) - 70;  // -70..70
+
+      btn.style.transform = `translate(${x}px, ${y}px)`;
     }
   </script>
 </body>
 </html>
-
