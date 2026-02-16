@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>For Bbub🫶🏻</title>
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <div class="blob b1"></div>
+  <div class="blob b2"></div>
+
+  <div class="toast" id="toast"><span class="dot"></span><span id="toastText">Saved 💌</span></div>
+
+  <div class="card" id="card">
+    <div class="topbar">
+      <div class="badge">💌 <span id="stepText">A tiny date quiz</span></div>
+
+      <div class="chip" id="timeChip">
+        ✨
+        <button class="chipBtn" onclick="openMiniMenu()" aria-label="Open menu">⋯</button>
+      </div>
+    </div>
+
+    <!-- PAGE 1: INTRO -->
+    <div id="intro">
+      <h1>Hi Bbub🫶🏻</h1>
+      <p>
+        This coming Valentine’s Day, I know you already have errands —
+        but I’d love to take you out on a date whenever you’re free.
+      </p>
+
+      <div class="note">📹 Take note: please screen record while answering the questions 😉</div>
+      <div class="divider"></div>
+
+      <div class="buttons" id="startArea">
+        <button class="primary" onclick="startQuestions()">Start 💌</button>
+      </div>
+
+      <div class="footer">Small reminder: you can always go back and change answers ✨</div>
+    </div>
+
+    <!-- PAGE 2: QUIZ -->
+    <div id="quiz" class="hidden">
+      <div class="progressWrap">
+        <div class="progressLabel" id="progressLabel">Question 1 of 7</div>
+        <div class="progress"><div class="progress-bar" id="progressBar"></div></div>
+      </div>
+
+      <div class="question" id="questionText"></div>
+      <div class="buttons" id="answerButtons"></div>
+
+      <div class="buttons">
+        <button class="ghost" onclick="goBack()" id="backBtn" disabled>← Back</button>
+        <button class="ghost" onclick="restart()" title="Start over">↺ Restart</button>
+      </div>
+
+      <div class="footer">Tip: choose what feels right — we’ll build the date together ✨</div>
+    </div>
+
+    <!-- PAGE 3: PICK DATE & TIME -->
+    <div id="final" class="hidden">
+      <h1>Pick Date &amp; Time 💌</h1>
+
+      <div class="pickerCard">
+        <div class="pickerTitle">
+          <span>Pick our date &amp; time 💌</span>
+          <span class="miniLink" onclick="suggestTimes()">Suggest ✨</span>
+        </div>
+
+        <div class="pickerGrid">
+          <div class="field">
+            <label for="datePick">Date</label>
+            <input id="datePick" type="date" />
+          </div>
+
+          <div class="field">
+            <label for="timePick">Time</label>
+            <input id="timePick" type="time" />
+          </div>
+        </div>
+
+        <div class="hint">Choose what works for you. I’ll adjust 🫶🏻</div>
+      </div>
+
+      <div class="buttons">
+        <button class="primary" onclick="goToExtraMessage()">Next 💞</button>
+        <button class="ghost" onclick="backToQuiz()">← Back</button>
+      </div>
+
+      <div class="footer" id="footerFinal">Made for Bbub🫶🏻 ✨</div>
+    </div>
+
+    <!-- PAGE 3.5: SWEET MESSAGE -->
+    <div id="extraMessage" class="hidden">
+      <h1>One more thing… 🫶🏻</h1>
+
+      <div class="messageCard">
+        <div class="messageTitle">
+          <span>A little note for you 💗</span>
+          <span class="miniLink" onclick="typeMessage()">Type it ✨</span>
+        </div>
+
+        <div class="messageBody" id="messageBody">
+          I know life gets busy, but I just want you to know: I’m proud of you.
+          I’m not here to rush you—only to choose you, gently, every day.
+        </div>
+
+        <div class="msgSmall">P.S. You can press “Type it ✨” if you want the message to appear like a cute typing effect 😌</div>
+      </div>
+
+      <div class="buttons">
+        <button class="primary" onclick="goToValentine()">Next 💘</button>
+        <button class="ghost" onclick="backToFinal()">← Back</button>
+      </div>
+
+      <div class="footer">You + me + a simple date = perfect 😌</div>
+    </div>
+
+    <!-- PAGE 4: VALENTINE (YES/NO with moving NO) -->
+    <div id="valentine" class="hidden">
+      <h1>So… will you be my Valentine? 💖</h1>
+      <p style="margin-bottom:10px;">
+        Just one last question… 🫶🏻
+      </p>
+
+      <div class="buttons">
+        <button class="primary" onclick="goToLoveReceipt()">Yes 💘</button>
+
+        <span class="no-wrap">
+          <button class="secondary no-btn" id="noBtn"
+            onmouseenter="moveNo()"
+            ontouchstart="moveNo(); return false;"
+            onclick="noTry()"
+          >
+            No 😜
+          </button>
+        </span>
+      </div>
+
+      <div class="footer">No pressure… but also… yes please 😌</div>
+    </div>
+
+    <!-- PAGE 5: RECEIPT + CONFIRM -->
+    <div id="loveReceiptPage" class="hidden">
+      <h1>Our Little Love Receipt 💌</h1>
+      <p style="margin-bottom:10px;">
+        Just to make sure everything looks perfect… 🫶🏻
+      </p>
+
+      <div class="summary" id="loveReceiptBox"></div>
+
+      <div class="buttons">
+        <button class="primary" onclick="confirmEverything()">Confirm 💞</button>
+        <button class="secondary" onclick="copyReceipt()">Copy receipt 📋</button>
+      </div>
+
+      <div id="celebrate" class="hidden confetti">
+        See you on our date, I'm so excited 💕
+      </div>
+      <div class="footer" id="footerReceipt">Made for Bbub🫶🏻 ✨</div>
+    </div>
+  </div>
+
+  <!-- Mini menu modal -->
+  <div class="modal" id="miniMenu" role="dialog" aria-modal="true">
+    <div class="modalCard">
+      <div class="modalTop">
+        <div class="t">Little menu ✨</div>
+        <button class="modalClose" onclick="closeMiniMenu()">Close</button>
+      </div>
+
+      <div class="modalBody">
+        <div style="opacity:.92;">Choose a tiny extra:</div>
+
+        <div class="modalGrid">
+          <div class="tile" onclick="toggleAmbience()">
+            <div><strong id="ambienceTitle">Ambience: ON</strong> 🌙</div>
+            <div class="small">Turns background hearts/sparkles on/off.</div>
+          </div>
+
+          <div class="tile" onclick="surpriseCompliment()">
+            <div><strong>Give me a compliment</strong> 🫶🏻</div>
+            <div class="small">A random sweet line.</div>
+          </div>
+
+          <div class="tile" onclick="jumpToReceipt()">
+            <div><strong>Jump to receipt</strong> 💌</div>
+            <div class="small">If you already answered everything.</div>
+          </div>
+        </div>
+
+        <div class="hint" style="margin-top:12px;">
+          Tip: long-press “No 😜” still won’t work 😌
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EmailJS (must be before script.js) -->
+  <script defer src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script defer src="script.js"></script>
+</body>
+</html>
